@@ -18,3 +18,44 @@ body {
   max-width: 320px;
   margin-bottom: 16px;
 }
+
+#search-box:focus {
+  outline: 1px solid #2196f3;
+}
+
+ul {
+  list-style: none;
+
+  margin-top: 0;
+  margin-bottom: 0;
+  padding-left: 0;
+}
+
+h2 {
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.card_img {
+  margin-right: 15px;
+
+  width: 30px;
+  height: 20px;
+}
+
+.card_item,
+.card_top {
+  display: flex;
+  align-items: center;
+
+  margin-bottom: 15px;
+}
+
+.card_item .card_title {
+  font-size: 16px;
+  line-height: 1.14;
+}
+
+.card_body span {
+  font-weight: 700;
+}

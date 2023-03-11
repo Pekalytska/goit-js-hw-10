@@ -36,26 +36,26 @@ h2 {
   margin-bottom: 0;
 }
 
-.card_img {
+.card-img {
   margin-right: 15px;
 
   width: 30px;
   height: 20px;
 }
 
-.card_item,
-.card_top {
+.card-item,
+.card-top {
   display: flex;
   align-items: center;
 
   margin-bottom: 15px;
 }
 
-.card_item .card_title {
+.card-item .card-title {
   font-size: 16px;
   line-height: 1.14;
 }
 
-.card_body span {
+.card-body span {
   font-weight: 700;
 }

@@ -4,11 +4,11 @@ function fetchCountries(country) {
   return fetch(
     `${BASE_URL}/name/${country}/?fields=name,capital,population,flags,languages`
   ).then(response => {
-    console.dir(response);
     if (!response.ok) {
       throw new Error(response.status);
-    }
-    return response.json();
+      }
+
+      return response.json();
   });
 }
 

@@ -3,7 +3,8 @@ import debounce from 'lodash.debounce';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import refs from './getRef';
 import API from './fetchCountries';
-import countryCardId from '../templates/country-card.hbs';
+import countryCardListId from '../templates/country-card_list.hbs';
+import countryCardInfoId from '../templates/country-card_info.hbs';
 
 const DEBOUNCE_DELAY = 300;
 
@@ -31,37 +32,36 @@ function renderCountryCard(country) {
   if (country.length > 10) {
     Notify.info('Too many matches found. Please enter a more specific name.');
     return;
-  }
-
-  if (country.length < 10 && country.length > 1) {
+  } else if (country.length < 10 && country.length > 1) {
     const markup = country
       .map(({ name, flags }) => {
-        return `<li class="card_item">
-                    <img class ="card_img" src="${flags.svg}" alt="${name.official}">
-                    <h2 class ="card_title"> ${name.official}</h2>
+        return `<li class="card-item">
+                    <img class ="card-img" src="${flags.svg}" alt="${name.official}">
+                    <h2 class ="card-title"> ${name.official}</h2>
                 </li>`;
       })
       .join('');
-    //const markup = countryCardId(country);
-    refs.card_list.innerHTML = markup;
-    refs.card_information.innerHTML = '';
-    return markup;
+
+    //const markup = country.map(item => countryCardListId(item));
+  } else {
+      const markup = country
+      .map(({ name, flags, capital, population, languages }) => {
+        languages = Object.values(languages).join(', ');
+        return `<div class="card-top">
+                  <img class ="card-img" src="${flags.svg}" alt="${name.official}">
+                  <h2 class ="card-title"> ${name.official}</h2>
+              </div>
+              <div class="card-body">
+                  <p><span>Capital: </span>${capital}</p>
+                  <p><span>Population: </span>${population}</p>
+                  <p><span>Languages: </span>${languages}</p>
+              </div>`;
+      })
+        .join('');
+    
+//  const markup = country.map(item => countryCardInfoId(item));
   }
 
-  const markup = country
-    .map(({ name, flags, capital, population, languages }) => {
-      languages = Object.values(languages).join(', ');
-      return `<div class="card_top">
-                <img class ="card_img" src="${flags.svg}" alt="${name.official}">
-                <h2 class ="card_title"> ${name.official}</h2>
-            </div>
-            <div class="card_body">
-                <p><span>Capital: </span>${capital}</p>
-                <p><span>Population: </span>${population}</p>
-                <p><span>Languages: </span>${languages}</p>
-            </div>`;
-    })
-    .join('');
   refs.card_information.innerHTML = markup;
   refs.card_list.innerHTML = '';
   return markup;
